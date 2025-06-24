@@ -4,7 +4,7 @@ import uuid
 from datetime import date, timedelta, datetime
 from sqlalchemy import create_engine, text
 from prefect import flow
-from prefect.schedules import CronSchedule
+from prefect.deployments.criteria import CronTrigger
 
 def main():
     # 🔐 Postgres credentials
@@ -254,7 +254,10 @@ def run_nasa_daily_load():
     main()
     
 if __name__ == "__main__":
-    run_nasa_daily_load.serve(
+    from prefect.deployments import Deployment
+    
+    Deployment.build_from_flow(
+        flow=nasa_daily_load,
         name="nasa_daily_load_deployment",
-        schedule=CronSchedule(cron="0 22 * * *"),
-    )
+        schedule=CronTrigger(cron="0 21 * * *",timezone="Europe/Paris"),
+    ).apply()
