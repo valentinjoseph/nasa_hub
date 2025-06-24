@@ -4,7 +4,7 @@ import uuid
 from datetime import date, timedelta, datetime
 from sqlalchemy import create_engine, text
 from prefect import flow
-from prefect.deployments.schedules import CronSchedule
+from prefect.schedules import CronSchedule
 
 def main():
     # 🔐 Postgres credentials
