@@ -100,7 +100,7 @@ def main():
     )
 
     # 🧠 Daily data load
-    api_key = "jRPuYFCnEid60PvQtnMIyODhZKzSvjS3scs9g5xv"
+    api_key = ["API_KEY HERE"]
     total_records = 0
     try:
         end_date = date.today()
